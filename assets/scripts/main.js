@@ -203,6 +203,11 @@ function bindEscKey() {
    * if the escape key is pressed, use your router to navigate() to the 'home'
    * page. This will let us go back to the home page from the detailed page.
    */
+   window.addEventListener('keydown', (e) => {
+    if (e.key == 'Escape') {
+      router.navigate('home', true);
+    }  
+  })
 }
 
 /**
@@ -227,6 +232,10 @@ function bindPopstate() {
   window.addEventListener('popstate', (e) => {
     const state = e.state
     console.log(state);
-    router.navigate(state ? state.page : 'home', true);
+    let page = 'home';
+    if (state) {
+      page = state.state;
+    }
+    router.navigate(page, true);
   })
 }
